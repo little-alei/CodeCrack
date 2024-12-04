@@ -35,6 +35,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/***
+ * @param context 用于非Compose组建用到的上下文
+ * 主界面
+ */
 @Composable
 fun AppBody(context: Context) {
     // 居中显示卡片
@@ -44,9 +48,11 @@ fun AppBody(context: Context) {
             var expanded by remember { mutableStateOf(false) }
 
             Column(
-                modifier = Modifier.clickable { expanded = !expanded }.fillMaxWidth() // 点击切换状态
+                modifier = Modifier.clickable {
+                    expanded = !expanded
+                }.fillMaxWidth() // 点击切换状态
             ) {
-                // 显示图片
+                // 显示介绍
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(painter = painterResource(R.drawable.ic_launcher_foreground), contentDescription = "AppLogo")
                     Column {
@@ -56,43 +62,48 @@ fun AppBody(context: Context) {
                     }
                 }
 
-                // 动画显示站看内容
+                // 动画展开显示作者信息
                 AnimatedVisibility(visible = expanded) {
-                    Row {
-                        Button(
-                            onClick = {
-                                toast("抠脚本人")
-                            },
-                            modifier = Modifier.padding(16.dp),
-                            shape = MaterialTheme.shapes.medium,
-                        ) {
-                            Text("显示作者")
-                        }
-                        // Spacer(Modifier.width(8.dp))
-                        Button(
-                            onClick = {
-                                // 创建 Intent 跳转到浏览器
-                                val intent = Intent(Intent.ACTION_VIEW).apply {
-                                    data = Uri.parse("https://github.com/")
-                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                }
-                                // 启动 Activity
-                                context.startActivity(intent)
-
-                            },
-                            modifier = Modifier.padding(16.dp),
-                            shape = MaterialTheme.shapes.medium,
-                        ) {
-                            Text("GitHub")
-                        }
-                    }
-
-
+                    AuthorInfo(
+                        "抠脚本人",
+                        "https://github.com/little-alei/CodeCrack"
+                    )
                 }
             }
         }
     }
+}
 
+@Composable
+fun AuthorInfo(author: String, github: String) {
+    val context = LocalContext.current
+    Row {
+        Button(
+            onClick = {
+                toast(author)
+            },
+            modifier = Modifier.padding(16.dp),
+            shape = MaterialTheme.shapes.medium,
+        ) {
+            Text("显示作者")
+        }
+        // Spacer(Modifier.width(8.dp))
+        Button(
+            onClick = {
+                // 创建 Intent 跳转到浏览器
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(github)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                // 启动 Activity
+                context.startActivity(intent)
+            },
+            modifier = Modifier.padding(16.dp),
+            shape = MaterialTheme.shapes.medium,
+        ) {
+            Text("GitHub")
+        }
+    }
 }
 
 @Composable

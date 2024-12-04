@@ -15,6 +15,6 @@ object HookEntry : IYukiHookXposedInit {
     override fun onHook() = YukiHookAPI.encase {
         // 打印打开的应用包名
         log("打开了应用包名: $packageName")
-
+        // hook 部分主要逻辑代码
     }
 }
