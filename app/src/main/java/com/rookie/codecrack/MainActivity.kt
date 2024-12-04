@@ -1,6 +1,5 @@
 package com.rookie.codecrack
 
-import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -25,22 +24,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // 使用主题
-            CodeCrackTheme {
+            // 使用主题，关闭动态颜色
+            CodeCrackTheme(dynamicColor = false) {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    AppBody(this.application)
+                    AppBody()
                 }
             }
         }
     }
 }
 
-/***
- * @param context 用于非Compose组建用到的上下文
- * 主界面
- */
 @Composable
-fun AppBody(context: Application? = null) {
+fun AppBody() {
     // 居中显示卡片
     Column(modifier = Modifier.padding(16.dp)) {
         Card {
