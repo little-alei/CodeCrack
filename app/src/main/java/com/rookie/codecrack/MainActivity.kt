@@ -51,7 +51,7 @@ fun AppBody() {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(painter = painterResource(R.drawable.ic_launcher_foreground), contentDescription = "AppLogo")
                     Column {
-                        Text(text = "拥抱Kotlin", style = MaterialTheme.typography.titleMedium)
+                        Text("拥抱Kotlin", style = MaterialTheme.typography.titleMedium)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("优雅的进行Xposed开发", style = MaterialTheme.typography.bodyLarge)
                     }
