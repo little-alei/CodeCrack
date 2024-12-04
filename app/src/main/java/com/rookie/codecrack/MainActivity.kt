@@ -1,6 +1,6 @@
 package com.rookie.codecrack
 
-import android.content.Context
+import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
  * 主界面
  */
 @Composable
-fun AppBody(context: Context) {
+fun AppBody(context: Application? = null) {
     // 居中显示卡片
     Column(modifier = Modifier.padding(16.dp)) {
         Card {
@@ -58,7 +58,7 @@ fun AppBody(context: Context) {
                     Column {
                         Text(text = "拥抱Kotlin", style = MaterialTheme.typography.titleMedium)
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = "优雅的进行Xposed开发", style = MaterialTheme.typography.bodyLarge)
+                        Text("优雅的进行Xposed开发", style = MaterialTheme.typography.bodyLarge)
                     }
                 }
 
@@ -110,6 +110,6 @@ fun AuthorInfo(author: String, github: String) {
 @Preview(showBackground = true)
 fun GreetingPreview() {
     CodeCrackTheme {
-        AppBody(LocalContext.current)
+        AppBody()
     }
 }
